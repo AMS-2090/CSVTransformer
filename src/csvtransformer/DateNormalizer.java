@@ -1,26 +1,44 @@
 package csvtransformer;
 
 /**
- * DateNormalizer class is a child of Normalizer class which defines:
- * - DATE_REGEX constant
- * - replace() method
+ * This is a child class of {@link csvtransformer.Normalizer} class
+ * which implements replacing algorithm for different date notations.
+ * <p>Example date notation inputs:
+ * <p><ul>
+ * <li>01.01.2016
+ * <li>31.1.2016
+ * <li>12-31-2016
+ * </ul>
+ * <p> After replacing result should have <b>DD.MM.YYYY</b> format. 
  * 
  * @author Arkadiusz So³tysiak
  */
 
 public class DateNormalizer extends Normalizer {
 
-	/* constant to store regex for matching wanted date patterns */
-	private static final String DATE_REGEX = "(\\d{1,2})(?:(?:\\.(\\d{1,2})\\.(\\d{4}))|(?:-(\\d{1,2})-(\\d{4})))";
+	/**
+	 * regular expression for date pattern
+	 * <p><ul>
+	 * <li>group 1: DAY for non-USA date format or MONTH for USA
+	 * <li>group 2: MONTH for non-USA date format
+	 * <li>group 3: YEAR for non-USA date format
+	 * <li>group 4: DAY for USA date format
+	 * <li>group 5: YEAR for USA date format
+	 */
+	private static final String DATE_REGEX 
+	= "(\\d{1,2})(?:(?:\\.(\\d{1,2})\\.(\\d{4}))|(?:-(\\d{1,2})-(\\d{4})))";
 
-	/* constructor assigns DATE_REGEX to use in find() method */
+	/**
+	 * Constructor initializes {@link Normalizer#regex} field
+	 * to be used in {@link Normalizer#find(String)} method. 
+	 */
 	public DateNormalizer() {
 		super.regex = DATE_REGEX;
 	}
 
-	/*
-	 * Overriding the replace() method to parse date and set day, month and year
-	 * at the proper positions.
+	/**
+	 * Implementation of {@link Normalizer#replace(String[])} method
+	 * to set the proper date format (DD.MM.YYYY).
 	 */
 	@Override
 	protected String replace(String[] groups) {
@@ -35,11 +53,13 @@ public class DateNormalizer extends Normalizer {
 			StringBuilder sbYear = new StringBuilder();
 
 			/*
-			 * USA date format: groups[2] == null means that the regex group for
-			 * USA date format was matched.
+			 * USA date format (MM-DD-YYYY): groups[2] == null
+			 * Means that the regex group
+			 * for USA date format was matched.
 			 */
 			if (groups[2] == null) {
 				if (groups[4].length() == 1) {
+					/* if one digit only, append 0 */
 					sbDay.append("0").append(groups[4]);
 				} else {
 					sbDay.append(groups[4]);
@@ -53,7 +73,7 @@ public class DateNormalizer extends Normalizer {
 				sbDate.append(sbDay).append(".").append(sbMonth).append(".")
 						.append(sbYear);
 			
-				// Not USA date format
+				/* Non-USA date format */
 			} else {
 				if (groups[1].length() == 1) {
 					sbDay.append("0").append(groups[1]);

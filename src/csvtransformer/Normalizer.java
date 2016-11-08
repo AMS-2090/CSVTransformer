@@ -1,32 +1,39 @@
 package csvtransformer;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
- * Normalizer abstract class defines methods: 
- * - find() 
- * - normalize() 
- * which are inherited by PriceNormalizer and DateNormalizer classes.
- * Normalizer also defines abstract method:
- * - replace()
+ * This abstract class is a base for finding and replacing defined patterns. 
  * 
  * @author Arkadiusz So³tysiak
  */
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public abstract class Normalizer {
 	
-	/* regex is defined in child classes */
+	/** 
+	 * Regular expression for searched pattern. 
+	 * Defined in the child classes.
+	 */
 	protected String regex;
 	
-	/* replace() method is defined by child classes */
+	/**
+	 * Replacing method to be implemented in the child classes. 
+	 * 
+	 * @param groups is an array of found pattern occurrences.
+	 * @return modified pattern occurrence.
+	 */
 	protected abstract String replace(String[] groups);
 	
-	/*
-	 * find() method searches for regex match
-	 * and returns array of found matched groups.
+
+	/**
+	 * Method searches for the {@link #regex} match
+	 * in the given input.
+	 * 
+	 * @param input to searched for REGEX pattern.
+	 * @return array of Strings containing found REGEX groups
 	 */
-	public String[] find(String input) {
+	private String[] find(String input) {
 
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(input);
@@ -43,9 +50,11 @@ public abstract class Normalizer {
 		return groups;
 	}
 	
-	/*
-	 * normalize() method combines results of find() and
-	 * replace() to return normalized String.
+	/**
+	 * Combines results of {@link #find(String)} and {@link #replace(String[])}.
+	 * 
+	 * @param input to searched for REGEX pattern.
+	 * @return normalized String
 	 */
 	public String normalize(String input) {
 

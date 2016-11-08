@@ -2,34 +2,47 @@ package csvtransformer;
 
 
 /**
- * PriceNormalizer class is a child of Normalizer class which defines:
- * - PRICE_REGEX
- * - LAST_SEPARATOR_REGEX
- * - SEPARATORS_REGEX
- * - replace() method
+ * This is a child class of {@link csvtransformer.Normalizer} class
+ * which implements replacing algorithm for different price notations.
+ * <p>Example price notation inputs:
+ * <p><ul>
+ * <li>1,000.00
+ * <li>1000,00
+ * <li>100.000,0
+ * </ul>
+ * <p>After replacing results:
+ * <p><ul>
+ * <li>1000.00
+ * <li>1000.00
+ * <li>100000.0
+ * </ul>
  * 
  * @author Arkadiusz So³tysiak
  */
 
 public class PriceNormalizer extends Normalizer{
 
-	/* constants to store regex for matching 
-	 * - price pattern,
-	 * - last separator before the decimal part,
-	 * - occurring separators in given numbers
-	 */
+	/** regular expression for price pattern */
 	private static final String PRICE_REGEX = "\\d+([.,]\\d{3})*([.,]\\d{1,2})?";
+	
+	/** regular expression for decimal separator */
 	private static final String LAST_SEPARATOR_REGEX = "[.,](?=\\d{1,2}$)";
+	
+	/** regular expression for all separators (decimal and thousands) */
 	private static final String SEPARATORS_REGEX = "[.,]";
 
-	/* constructor assigns PRICE_REGEX to use in find() method */
+	/**
+	 * Constructor initializes {@link Normalizer#regex} field
+	 * to be used in {@link Normalizer#find(String)} method. 
+	 */
 	public PriceNormalizer() {
 		super.regex = PRICE_REGEX;
 	}
 	
-	/*
-	 * Overriding the replace() method to erase unwanted
-	 * punctuation and set decimal separator as a dot.
+
+	/**
+	 * Implementation of {@link Normalizer#replace(String[])} method
+	 * to erase unwanted punctuation and set decimal separator as a dot.
 	 */
 	@Override
 	protected String replace(String[] groups) {
@@ -40,14 +53,18 @@ public class PriceNormalizer extends Normalizer{
 
 			/* groups[0] - entire match */
 			String matchedPrice = groups[0];
+			
 			/* temporary character to set at the decimal separator position */
 			String tempDotReplacement = "#";
+			
 			/* setting decimal separator position with # */
 			String lastPunctHashedPrice = matchedPrice.replaceAll(
 					LAST_SEPARATOR_REGEX, tempDotReplacement);
+			
 			/* removing all of the separators */
 			String punctRemovedPrice = lastPunctHashedPrice.replaceAll(
 					SEPARATORS_REGEX, "");
+			
 			/* going back to '.' instead of # */
 			String backToDotPrice = punctRemovedPrice.replaceAll(
 					tempDotReplacement, ".");
