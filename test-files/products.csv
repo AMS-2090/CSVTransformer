@@ -1,0 +1,11 @@
+"Product Name";"Link";"SKU";"Selling-Price";"description"
+"Product #1";"http://www.test123.com";"HD-23";"USD 1,034.99";"This field contains no date!"
+"Product #2";"http://www.test123.com";"JD-33";"USD 8654.56";"Here is a date: 19.04.2015"
+"Product #3";"http://www.test123.com";"KK-SSY";"EUR 1722,59";"Another date: 29.9.1998"
+"Product #4";"http://www.test123.com";23-KI;"683,99 €";"no date here!"
+"Product #5";"http://www.test123.com";"PO-4D";"$24.20";"Here are some special characters: öäüß"
+"Product #6";"http://www.test123.com";"68-SW";"981.654,0 EUR";"American date: 11-28-2004"
+"Product #7";"http://www.test123.com";"DDKO-R5";"345.024,0 EUR";"One more date: 2.11.2013"
+"Product #8";"http://www.test123.com";"LLOG-09";"32,95";
+"Product #9";"http://www.test123.com";"KSI-22";321.89;"Note from 1-22-2012"
+"Product #10";"http://www.test123.com";"57-S4N";58;
