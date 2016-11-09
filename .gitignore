@@ -125,7 +125,7 @@ hs_err_pid*
 *.ucls
 
 # CSV files
-*.csv
+#*.csv
 
 ## Javadoc folder ##
 doc/
