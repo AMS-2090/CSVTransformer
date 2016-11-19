@@ -44,6 +44,6 @@ output file column name | value
 ------------------------|-----------------------------------------------------------------------
 name                    | same as ```Product Name``` column
 offerurl                | content from ```Link``` column + ```?id=``` + ```SKU``` column content
-price                   | numeric value from ```Selling-Price``` column normalized to have dot character ```.``` as a decimal separator and no thousands separator ```,``` eg. _1234.56_
+price                   | numeric value from ```Selling-Price``` column normalized to have a period character ```.``` as a decimal separator and no thousands separator ```,``` eg. _1234.56_
 published               | date from ```description``` column if it exists; normalized to _DD.MM.YYYY_ format
 description             | same as the original ```description``` column
