@@ -42,7 +42,7 @@ public class PriceNormalizer extends Normalizer{
 
 	/**
 	 * Implementation of {@link Normalizer#replace(String[])} method
-	 * to erase unwanted punctuation and set decimal separator as a dot.
+	 * to erase unwanted punctuation and set decimal separator as a period.
 	 */
 	@Override
 	protected String replace(String[] groups) {
@@ -55,21 +55,21 @@ public class PriceNormalizer extends Normalizer{
 			String matchedPrice = groups[0];
 			
 			/* temporary character to set at the decimal separator position */
-			String tempDotReplacement = "#";
+			String tempPeriodReplacement = "#";
 			
 			/* setting decimal separator position with # */
 			String lastPunctHashedPrice = matchedPrice.replaceAll(
-					LAST_SEPARATOR_REGEX, tempDotReplacement);
+					LAST_SEPARATOR_REGEX, tempPeriodReplacement);
 			
 			/* removing all of the separators */
 			String punctRemovedPrice = lastPunctHashedPrice.replaceAll(
 					SEPARATORS_REGEX, "");
 			
 			/* going back to '.' instead of # */
-			String backToDotPrice = punctRemovedPrice.replaceAll(
-					tempDotReplacement, ".");
+			String backToPeriodPrice = punctRemovedPrice.replaceAll(
+					tempPeriodReplacement, ".");
 
-			return backToDotPrice;
+			return backToPeriodPrice;
 		}
 	}
 
