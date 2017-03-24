@@ -19,7 +19,7 @@ character function | character used in file
 -------------------|-----------------------
 separator          | **;** (_semicolon_)
 quote              | **"** (_double quote_)
-escape             | **\** (_backslash_)
+escape             | **\\** (_backslash_)
 
 ## Output file format:
 
@@ -34,13 +34,13 @@ name|offerurl|price|published|description
 
 character function | character used in file
 -------------------|-----------------------
-separator          | **\|** (_pipe_)
+separator          | **|** (_pipe_)
 quote              | **'** (_single quote_)
-escape             | **\** (_backslash_)
+escape             | **\\** (_backslash_)
 
 ## Values of the output file columns
 
-output file column name | value
+output file's column name | value
 ------------------------|-----------------------------------------------------------------------
 name                    | same as ```Product Name``` column
 offerurl                | content from ```Link``` column + ```?id=``` + ```SKU``` column content
