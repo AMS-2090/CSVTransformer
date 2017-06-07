@@ -34,7 +34,7 @@ name|offerurl|price|published|description
 
 character function | character used in file
 -------------------|-----------------------
-separator          | **|** (_pipe_)
+separator          | **&#124;** (_pipe_)
 quote              | **'** (_single quote_)
 escape             | **\\** (_backslash_)
 
