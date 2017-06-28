@@ -142,6 +142,3 @@ hs_err_pid*
 
 ## Javadoc folder ##
 doc/
-
-## Temporarily do not track unit test files ##
-src/test/
